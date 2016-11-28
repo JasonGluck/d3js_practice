@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <title>My First D3</title>
+  </head>
+  <body>
+    <script>
+      var canvas = d3.select("body")
+                    .append("svg")
+                    .attr("width", 500)
+                    .attr("height", 500);
+
+      var rectangle = canvas.append("rect")
+                        .attr("width", 500)
+                        .attr("height", 500)
+                        .attr("fill", "blue");
+
+      var circle = canvas.append("circle")
+                    .attr("cx", 250)
+                    .attr("cy", 250)
+                    .attr("r", 250)
+                    .attr("fill", "red");
+
+      var line = canvas.append("line")
+                  .attr("x1", 0)
+                  .attr("y1", 0)
+                  .attr("x2", "500")
+                  .attr("y2", "500")
+                  .attr("stroke", "purple")
+                  .attr("stroke-width", 10);
+
+    </script>
+  </body>
+</html>
