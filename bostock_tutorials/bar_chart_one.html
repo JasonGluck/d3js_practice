@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Bar Char One</title>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+  <body>
+  </body>
+  <script>
+  let w = window.innerWidth
+  let h = window.innerHeight
+
+  let svg = d3.select("body")
+              .append("svg")
+              .attr("width", w)
+              .attr("height", h)
+              .classed("svg-container", true)
+              .attr("preserveAspectRatio", "xMinYMin meet")
+              .attr("viewBox", "0 0 " + w + " " + h + "")
+              .classed("svg-content-responsive", true)
+
+  let data = d3.range(25).map(function() {
+    return parseInt(Math.random() * 100)
+  })
+
+  let margin = {right: parseInt(w*.95),
+    bottom: parseInt(h*.95)
+  }
+
+  let x = d3.scaleLinear()
+    .domain([0, d3.max(data)])
+    .range([0, margin.right])
+
+  let y = d3.scaleLinear()
+    .domain([0, data.length])
+    .range([0, margin.bottom])
+
+  svg.selectAll(".bar")
+    .data(data)
+    .enter()
+      .append("rect")
+      .classed("bar", true)
+      .attr("x", 0)
+      .attr("y", (d, i) => y(i))
+      .attr("width", (d) => {return x(d)})
+      .attr("height", (d) => {return y(1) - 1})
+      .attr("fill", (d) => {return "rgb(0, 0, " + d + ")"})
+      .on("mouseover", function() {
+        d3.select(this).attr("fill", "red")
+      })
+      .on("mouseout", function(d) {
+        d3.select(this).attr("fill", "rgb(0, 0, " + d + ")")
+      })
+
+  svg.selectAll(".bar-label")
+    .data(data)
+    .enter()
+      .append("text")
+      .classed("bar-label", true)
+      .attr("x", (d) => {return x(d)})
+      .attr("dx",(d) => {return x(1)})
+      .attr("y", (d,i) => {return y(i)})
+      .attr("dy", (d,i) => {return y(1) / 1.5})
+      .text((d) => {return d})
+  </script>
+</html>

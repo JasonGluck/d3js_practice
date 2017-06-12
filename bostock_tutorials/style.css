@@ -1,0 +1,8 @@
+.chart {
+  font: 10px sans-serif;
+  background-color: steelblue;
+  color: white;
+  display: block;
+  margin: auto;
+  shape-rendering: crispEdges;
+}
